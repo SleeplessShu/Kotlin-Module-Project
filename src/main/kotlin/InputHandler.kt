@@ -46,14 +46,20 @@ object InputHandler {
     }
     fun descriptionInput(): String {
         var message: String = ""
-        println(TextDisplaying.noteDescription)
-        println(TextDisplaying.zeroForExit)
-        message = readLine().toString()
-        if (message == "0") {
-            ChoiceHandler.menuChoiceHandler(9999, mutableListOf(), "Заметка")
-        } else if (message == ""){
-            message = TextDisplaying.descriptionIsEmpty
+        var isNotEmpty: Boolean = false
+        while (!isNotEmpty) {
+            println(TextDisplaying.noteDescription)
+            println(TextDisplaying.zeroForExit)
+            message = readLine().toString()
+            if (message == "0") {
+                ChoiceHandler.menuChoiceHandler(9999, mutableListOf(), "Заметка")
+            } else if (message != "") {
+                isNotEmpty = true
+            } else {
+                println(TextDisplaying.descriptionIsEmpty)
+            }
         }
+
         return message
     }
     private fun messageStringEnd(type: String, ender: String): String {
